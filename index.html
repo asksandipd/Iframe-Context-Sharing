@@ -1,8 +1,8 @@
 <html>
 <head>
 	<meta charset="utf-8">
-
 	<title></title>
+	<script src="GlobalContextManager.js"></script>
 </head>
 <body>
 
@@ -13,20 +13,18 @@
 	<iframe name="b" id="b" src="appB.html" width="100%"></iframe>
 
 	<script>
-	window.onload = function () {
-		
-		// global context
-		window.__CONTEXT__ = 'all';
-		window.P9 = document.querySelector('#P9').contentWindow.window;
-		window.a = document.querySelector('#a').contentWindow.window;
-		window.b = document.querySelector('#b').contentWindow.window;
-		window.c = window.P9.window.document.querySelector('#c').contentWindow.window;
-
-		// context of P9
-		console.debug(window.__CONTEXT__ === "all",   'the context of "index" should be "all"');
-		console.debug(window.P9.__CONTEXT__ === "P9", 'the context of "P9" from "index" should be "P9"');
-	}
+	(function () {
+		var gcm = window.top.GlobalContextManager;
+		gcm.register('global', this);
+		gcm.onload(function () {
+			console.debug('Test: global');
+			console.debug('[', gcm.get('global').__NAME, ',', 'global ]', 'the context of "global" should be "global"');
+			console.debug('[', gcm.get('P9').__NAME, ',', 'P9', ']', 'the context of "P9" from "global" should be "P9"');
+			console.debug('[', gcm.get('a').__NAME, ',', 'a', ']', 'the context of "a" from "global" should be "a"');
+			console.debug('[', gcm.get('b').__NAME, ',', 'b', ']', 'the context of "b" from "global" should be "b"');
+			console.debug('[', gcm.get('c').__NAME, ',', 'c', ']', 'the context of "c" from "global" should be "c"');
+		});
+	}());
 	</script>
-
-	</body>
-	</html>
+</body>
+</html>

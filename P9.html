@@ -4,12 +4,21 @@
 	<title></title>
 </head>
 <body>
-
 	<h1>Context: P9</h1>
 	<iframe name="c" id="c" src="appC.html" width="100%"></iframe>
 	<script>
-		window.__CONTEXT__ = 'P9';
-		console.debug(window.__CONTEXT__ === 'P9', 'the context of "P9" should be "P9"');
+	(function () {
+		var gcm = window.top.GlobalContextManager;
+		gcm.register('P9', this);
+		gcm.onload(function () {
+			console.debug('Test: P9');
+			console.debug('[', gcm.get('P9').__NAME, ',', 'P9 ]', 'the context of "P9" should be "P9"');
+			console.debug('[', gcm.get('global').__NAME, ',', 'global', ']', 'the context of "global" from "P9" should be "global"');
+			console.debug('[', gcm.get('a').__NAME, ',', 'a', ']', 'the context of "a" from "P9" should be "a"');
+			console.debug('[', gcm.get('b').__NAME, ',', 'b', ']', 'the context of "b" from "P9" should be "b"');
+			console.debug('[', gcm.get('c').__NAME, ',', 'c', ']', 'the context of "c" from "P9" should be "c"');
+		});
+	}());
 	</script>
 </body>
 </html>
