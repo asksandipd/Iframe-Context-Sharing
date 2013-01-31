@@ -1,15 +1,23 @@
 <html>
 <head>
 	<meta charset="utf-8">
-
 	<title></title>
 </head>
 <body>
-
 	<h1>Context: B</h1>
 	<script>
-		window.__CONTEXT__ = 'b';
-		console.debug(window.__CONTEXT__ === "b", 'the context of "b" should be "b"');
+	(function () {
+		var gcm = window.top.GlobalContextManager;
+		gcm.register('b', this);
+		gcm.onload(function () {
+			console.debug('Test: b');
+			console.debug('[', gcm.get('b').__NAME, ',', 'b ]', 'the context of "b" should be "b"');
+			console.debug('[', gcm.get('P9').__NAME, ',', 'P9', ']', 'the context of "P9" from "b" should be "P9"');
+			console.debug('[', gcm.get('a').__NAME, ',', 'a', ']', 'the context of "a" from "b" should be "a"');
+			console.debug('[', gcm.get('global').__NAME, ',', 'global', ']', 'the context of "global" from "b" should be "global"');
+			console.debug('[', gcm.get('c').__NAME, ',', 'c', ']', 'the context of "c" from "b" should be "c"');
+		});
+	}());
 	</script>
 </body>
 </html>
