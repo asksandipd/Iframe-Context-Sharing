@@ -8,22 +8,23 @@
 
 	<h1>Context: window.top</h1>
 
-	<iframe name="p9" id="p9" src="P9.html" width="100%" height="200px"></iframe>
+	<iframe name="P9" id="P9" src="P9.html" width="100%" height="200px"></iframe>
 	<iframe name="a" id="a" src="appA.html" width="100%"></iframe>
 	<iframe name="b" id="b" src="appB.html" width="100%"></iframe>
 
 	<script>
 	window.onload = function () {
-		// ce contexte
+		
+		// global context
 		window.__CONTEXT__ = 'all';
-		window.p9 = document.querySelector('#p9').contentWindow.window;
+		window.P9 = document.querySelector('#P9').contentWindow.window;
 		window.a = document.querySelector('#a').contentWindow.window;
 		window.b = document.querySelector('#b').contentWindow.window;
-		window.c = window.p9.window.document.querySelector('#c').contentWindow.window;
+		window.c = window.P9.window.document.querySelector('#c').contentWindow.window;
 
-		// contexte de P9
-		console.log('le contexte courant de "index" est ', window.__CONTEXT__);
-		console.log('le contexte de "P9" depuis "index" est ', window.p9.__CONTEXT__);
+		// context of P9
+		console.debug(window.__CONTEXT__ === "all",   'the context of "index" should be "all"');
+		console.debug(window.P9.__CONTEXT__ === "P9", 'the context of "P9" from "index" should be "P9"');
 	}
 	</script>
 

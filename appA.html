@@ -6,15 +6,11 @@
 </head>
 <body>
 
-	<h1>Context: window.iframes.appA</h1>
+	<h1>Context: A</h1>
 	<script>
-		// context courant
 		window.__CONTEXT__ = 'a';
-
-		// context P9
-		console.log('le context de "a" est ', window.__CONTEXT__);
-		console.log('le context de "P9" depuis "a" est ', window.top.p9.__CONTEXT__);
-
+		console.debug(window.__CONTEXT__ === "a", 			'the context of "a" should be "a"');
+		console.debug(window.top.P9.__CONTEXT__ === "P9", 	'the context of "P9" from "a" should be "P9"');
 	</script>
 </body>
 </html>
