@@ -48,11 +48,11 @@
       <section id="main_content">
         <h1>Iframe Context Sharing</h1>
 
-<p>A quick demo about on how context can be shared between mulptiple frames using different approaches:</p>
+<p>A quick demo about how context can be shared between mulptiple iframes using different approaches:</p>
 
 <ul>
-<li>window.top</li>
-<li>pub/sub (using the great <a href="http://amplifyjs.com/">http://amplifyjs.com/</a>)</li>
+<li>window.top + a global context manager GCM (cons: each iframe has to invoke and register its context with the GCM)</li>
+<li>window.top + pub/sub pattern (a more acceptable solution)</li>
 </ul>
       </section>
 
