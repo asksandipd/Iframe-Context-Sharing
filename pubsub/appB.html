@@ -1,0 +1,17 @@
+<html>
+<head>
+	<meta charset="utf-8">
+	<title></title>
+	<script src="amplify.patch.js"></script>
+</head>
+<body>
+	<h1>Context: B</h1>
+	<script>
+	window.__NAME = 'b';
+	amplify.subscribe('context/b', this, function (requester) {
+		console.debug('"b" context was invoked from "', requester.__NAME, '"');
+	});
+	</script>
+	<script src="test.js"></script>
+</body>
+</html>
